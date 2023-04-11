@@ -3,57 +3,77 @@ import java.util.Scanner;
 public class Calculator {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        int integer;
+        double number;
         String symbol;
-        int numModify;
-        System.out.print("Enter first integer: ");
-        integer = s.nextInt();
+        double numModify;
+        System.out.print("Enter first number: ");
+        number = s.nextDouble();
         do {
-            System.out.print("Put symbol if you want to add, subtract, multiply or divide (s to stop): ");
+            System.out.print("Put symbol or words if you want to add, subtract, multiply, divide, power, or sqrt (s to stop): ");
 
             symbol = s.next();
 
-            if (symbol.equals("+")) {
+            if (symbol.equals("+") || symbol.equals("add")) {
                 numModify = addition();
-                integer += numModify;
-            } else if(symbol.equals("-")){
+                number += numModify;
+            } else if(symbol.equals("-") || symbol.equals("subtract")){
                 numModify = subtraction();
-                integer -= numModify;
-            } else if(symbol.equals("*")){
+                number -= numModify;
+            } else if(symbol.equals("*") || symbol.equals("multiply")){
                 numModify = multiplication();
-                integer *= numModify;
-            } else if(symbol.equals("/")){
+                number *= numModify;
+            } else if(symbol.equals("/") || symbol.equals("divide")){
                 numModify = division();
                 if (numModify == 0){
                     System.out.println("Undefined");
                     return;
                 }
-                integer /= numModify;
+                number /= numModify;
+            } else if(symbol.equals("^") || symbol.equals("power")){
+                System.out.print("Enter the power: ");
+                int input = s.nextInt();
+                number = Math.pow(number, input);
+            } else if(symbol.equals("sqrt")){
+                number = Math.sqrt(number);
             }
-            System.out.println("Your current number is: " + integer);
+            if(Math.floor(number) == number){
+                System.out.println("Your current number is: " + fullNum(number));
+
+            } else {
+                System.out.println("Your current number is: " + number);
+            }
+
+
         } while (!symbol.equalsIgnoreCase("s"));
-        System.out.println("Your final value is: " + integer);
+        System.out.println("Your final value is: " + number);
+    }
+    public static int fullNum(double digit){
+        return (int)(digit);
     }
 
-    public static int addition() {
+
+
+
+    public static double addition() {
         Scanner s = new Scanner(System.in);
         System.out.print("Enter a number to add:");
-        return s.nextInt();
+        return s.nextDouble();
     }
 
-    public static int subtraction() {
+    public static double subtraction() {
         Scanner s = new Scanner(System.in);
         System.out.print("Enter a number to subtract:");
-        return s.nextInt();
+        return s.nextDouble();
     }
-    public static int multiplication() {
+    public static double multiplication() {
         Scanner s = new Scanner(System.in);
         System.out.print("Enter a number to multiply:");
-        return s.nextInt();
+        return s.nextDouble();
     }
-    public static int division() {
+    public static double division() {
         Scanner s = new Scanner(System.in);
         System.out.print("Enter a number to divide:");
-        return s.nextInt();
+        return s.nextDouble();
     }
+
 }
